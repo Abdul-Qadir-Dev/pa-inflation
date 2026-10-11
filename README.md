@@ -57,3 +57,9 @@ python run.py
 
 - PA%K from the same paper, which only adjusts a window if at least K% of it is flagged, to see where between plain F1 and PA-F1 the ranking flips.
 - Run NASA SMAP/MSL from a mirror and see whether the same thing happens there.
+
+## Credits
+
+Data: Numenta Anomaly Benchmark (NAB), https://github.com/numenta/NAB. `get_data.py` downloads it and none of it is stored in this repo.
+
+Kim, S., Choi, K., Choi, H.-S., Lee, B. and Yoon, S. Towards a rigorous evaluation of time-series anomaly detection. AAAI 2022.
