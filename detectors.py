@@ -86,6 +86,8 @@ def lstm_ae(train, test, seed=0, info=None, epochs=20, patience=3, cap=120, batc
             break
     model.load_state_dict(best_state)
 
+    # each window's error goes to its last point, same as the forest
+    # TODO: try averaging the per-point error over every window that covers a point
     scores = []
     tw = test_windows(train, test)
     model.eval()

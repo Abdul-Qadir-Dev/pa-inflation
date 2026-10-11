@@ -43,6 +43,7 @@ def nasa_series():
 
     Only channel 0 (the telemetry value) is used; the other columns are one-hot command flags.
     """
+    # TODO: never actually run, the telemanom bucket was returning 403. Check it if the data turns up.
     root = os.path.join(DATA, "nasa")
     if not os.path.exists(os.path.join(root, "test")):
         return

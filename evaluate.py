@@ -43,6 +43,8 @@ def evaluate(scores, y):
         best_f1 = max(best_f1, f1(pred, y))
         best_pa = max(best_pa, f1(point_adjust(pred, y, segs), y))
 
+    # TODO: add PA%K from Kim et al. (only adjust a segment if at least K% of it is flagged)
+
     # sanity line: a fixed 1% flag rate, no peeking at labels to pick the threshold
     pred = scores >= np.quantile(scores, 0.99)
     return {
