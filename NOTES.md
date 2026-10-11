@@ -1,7 +1,6 @@
 2026-10-11
 
 - The NASA S3 bucket for telemanom returns 403 Forbidden, from both requests and curl and on both URL styles. The labels CSV on GitHub still downloads fine, but there's no data to go with it. Going ahead with NAB only. The loader for SMAP/MSL stays in windows.py in case the bucket comes back.
-- All 34 NAB series in the three real folders downloaded on the first try. I'm using the keys in combined_windows.json as the file list, which saved me from calling the GitHub API.
 - Four series have no labelled window in their second half (ec2_cpu_utilization_825cc2, ec2_cpu_utilization_c6585a, ec2_network_in_257a54, iio NetworkIn), so F1 isn't defined on the test part. Dropping them leaves 30.
 - A lot of series have labelled anomalies in the first half too, which means the "train" data isn't clean. That's the NAB split problem and I can't do much about it without cherry-picking series.
 - Test scoring borrows the last 63 training points as context so every test point gets a window ending on it. That keeps scores and labels the same length with no padding.
@@ -12,4 +11,4 @@
 - The result isn't quite the one I expected. Point adjustment lifts everything to 0.95 to 0.98, and random comes out ahead of both the forest and the LSTM on median PA-F1. But plain F1 doesn't close the gap between the LSTM and the z-score, it shows one: 0.38 vs 0.22, with the z-score barely above random. PA is what hides it.
 - I expected the tweets to be hopeless. They're the folder where the learned models look best relative to random on plain F1 (0.34 vs 0.12), mostly because their windows are a smaller share of the test half, so flag-everything does badly.
 - Plots. The example figures mark the top 1% of scores rather than the best-F1 threshold, so they don't use the labels. The z-score one is the clearest picture of the problem: most of its flags land outside the windows, a couple land inside, and that's worth 0.96 PA-F1 on this series.
-- Notebook built and executed. It reads the saved score traces instead of retraining anything, so it runs in a few seconds. The forest is the best plain-F1 detector on machine_temperature (0.69) even though it's only third by median, which is a good reminder not to judge from one series.
+- Notebook built and executed. It reads the saved score traces instead of retraining anything, so it runs in a few seconds. The forest is the best plain-F1 detector on machine_temperature (0.69) even though the LSTM edges it on the median, which is a good reminder not to judge from one series.
